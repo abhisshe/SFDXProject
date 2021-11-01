@@ -35,12 +35,11 @@ node {
 
 			println rc
 			
-			// need to pull out assigned username
 			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${SFDX_HOME}/sfdx force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
-			}else{
-			   rmsg = bat returnStdout: true, script: "\"${SFDX_HOME}/sfdx\" force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
-			}
+rmsg = sh returnStdout: true, script: "${SFDX_HOME}/sfdx force:source:deploy --manifest manifest/package.xml -u ${HUB_ORG}"
+}else{
+rmsg = bat returnStdout: true, script: "\"${SFDX_HOME}/sfdx\" force:source:deploy --manifest manifest/package.xml -u ${HUB_ORG}"
+}
 			  
             printf rmsg
             println('Hello from a Job DSL script!')
